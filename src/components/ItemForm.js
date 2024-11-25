@@ -2,10 +2,18 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Importando estilos do calendário
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const ItemForm = ({ onSubmit, formType }) => {
   const [formData, setFormData] = useState({ type: '', color: '', location: '', description: '', date: new Date(), image: null });
   const [showCalendar, setShowCalendar] = useState(false);
+  const options = [ "ESTIG", "ESA", "ESE", "ESAC", "ESSA" ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,6 +52,22 @@ const ItemForm = ({ onSubmit, formType }) => {
           required
         />
       </div>
+
+      <div className="mb-4">
+        <Select>
+          <SelectTrigger className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <SelectValue placeholder="Selecione um tipo" />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((option) => (
+              <SelectItem key={option} value={option}>
+                {option}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
       <div className="mb-4">
         <input
           type="text"
